@@ -1,2 +1,3 @@
 simPy >= 2.0
 pyparsing
+coveralls
