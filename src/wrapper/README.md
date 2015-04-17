@@ -10,7 +10,7 @@ The enviroment class enables to emulate a enviroment instance, that will be atta
 a very simple example lies here (Note: You'll need to read about how the mutator works if you want to define the 
 behaviour from string as the AST does when it's processed):
 
-'''python
+```python
 
 from src.wrapper.enviroment import *
 from src.dynamic.mutator import *
@@ -32,4 +32,4 @@ env.attach_process_name('duration')
 env.execute(until=11)
 print env.get_enviroment()
 
-'''
+```
