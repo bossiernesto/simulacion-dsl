@@ -5,7 +5,6 @@ class TestSyntax(TestCase):
     def setUp(self):
         pass
 
-    @skip
     def test_definition_of_container(self):
         input = """
         enviroment {
