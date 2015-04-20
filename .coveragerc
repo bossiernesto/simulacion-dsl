@@ -1,6 +1,6 @@
 [run]
 omit =
-    *tests.py
+    *tests.py, site-packages
 
 [report]
 exclude_lines =
