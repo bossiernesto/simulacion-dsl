@@ -1,10 +1,23 @@
 class MutatorException(Exception):
-    pass
+    def __init__(self, *args, **kwargs):
+        Exception.__init__(self, *args, **kwargs)
+
 
 class SelectorNotFoundException(Exception):
-    pass
+    def __init__(self, *args, **kwargs):
+        Exception.__init__(self, *args, **kwargs)
 
 
 class EnviromentException(Exception):
-    pass
+    def __init__(self, *args, **kwargs):
+        Exception.__init__(self, *args, **kwargs)
 
+
+class DSLLexerException(Exception):
+    def __init__(self, *args, **kwargs):
+        Exception.__init__(self, *args, **kwargs)
+
+
+class DSLParserException(Exception):
+    def __init__(self, *args, **kwargs):
+        Exception.__init__(self, *args, **kwargs)

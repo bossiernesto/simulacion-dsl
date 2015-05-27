@@ -5,66 +5,46 @@
 """
 This is the AST node class that will define the structure after the parsing process and will generate the python code to be performed later on.
 """
-CONTEXT_OPEN_CHAR = "{"
-CONTEXT_CLOSE_CHAR = "}"
-DELIMITERS = [CONTEXT_CLOSE_CHAR, CONTEXT_OPEN_CHAR]
-
-
 class ASTNode(object):
-    def __init__(self, tokens):
-        self.tokens = tokens
-        self.assignFields()
+    pass
 
-    def __str__(self):
-        return self.__class__.__name__ + ':' + str(self.__dict__)
+class ContextDefinition(ASTNode):
+    def __init__(self, values):
+        context_name, inner_block = values
+        self.context_name = context_name
+        self.inner_block = inner_block
 
-    __repr__ = __str__
-
-
-class EnviromentName(ASTNode):
-    def assignFields(self):
-        self.name = self.tokens[0]
-
-    def get_name(self):
-        return self.name
-
-
-class Enviroment(ASTNode):
-    def assignFields(self):
-        self.delimiters = DELIMITERS
-        self.enviroment_name = self.tokens[1]
-        self.statements = []
-        l = len(self.tokens)
-        for token in self.tokens[2:l]:
-            if token in self.delimiters:
-                continue
-            self.statements.append(token)
-        print self.tokens
-
-    def get_enviroment_name(self):
-        return self.enviroment_name.get_name()
-
+class Environment(ASTNode):
+    def __init__(self, inner_block):
+        self.inner_block = inner_block
 
 class Assignment(ASTNode):
-    def assignFields(self):
-        self.lhs, self.rhs = self.tokens
-        del self.tokens
+    def __init__(self, values):
+        id, value = values
+        self.id = id
+        self.value = value
 
+class AbstractMethodCall(ASTNode):
+    def __init__(self, values):
+        function_name, arguments = values
+        self.arguments = []
+        self.function_name = function_name
+        for argument in arguments:
+            new_argument = Argument(argument.name, None) if not argument.value else Argument(argument.value, argument.name)
+            self.arguments.append(new_argument)
 
-class MessagePassing(ASTNode):
-    def assignFields(self):
-        pass
+class FunctionCall(AbstractMethodCall):
+    pass
 
+class EnvironmentCall(AbstractMethodCall):
+    pass
 
-class Arguments(ASTNode):
-    def assignFields(self):
-        self.arguments = self.tokens
-        del (self.tokens)
+class Argument(ASTNode):
+    def __init__(self, value, name):
+        self.value = value
+        self.name = name
 
-
-class FunctionCall(ASTNode):
-    def assignFields(self):
-        self.fnName, self.args = self.tokens
-        del self.tokens
-
+class Accessor(ASTNode):
+    def __init__(self, values):
+        self.receptor, self.attr = values
 
